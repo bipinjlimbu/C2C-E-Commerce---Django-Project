@@ -7,6 +7,8 @@
 
 <body class="bg-[#F8FAFC] text-[#0F172A] antialiased min-h-screen">
 
+    {% include 'components/_navbar.html' %}
+
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
         
         <section class="bg-white rounded-2xl p-8 sm:p-12 shadow-sm border border-slate-100 flex flex-col md:flex-row items-center justify-between gap-8">
@@ -27,26 +29,6 @@
                     <a href="#" class="inline-flex items-center gap-2 px-6 py-3 bg-[#F8FAFC] hover:bg-slate-100 text-[#0F172A] font-medium rounded-xl border border-slate-200 transition-colors">
                         <i data-lucide="plus-circle" class="w-5 h-5 text-[#2563EB]"></i> Sell an Item
                     </a>
-                </div>
-            </div>
-            
-            <div class="w-full md:w-80 bg-[#F8FAFC] p-6 rounded-xl border border-slate-200 space-y-4">
-                <div class="flex items-center gap-3">
-                    <div class="p-2.5 bg-[#2563EB]/10 rounded-lg text-[#2563EB]">
-                        <i data-lucide="zap" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-[#0F172A]">Quick Search</h3>
-                        <p class="text-xs text-[#64748B]">Find deals near you</p>
-                    </div>
-                </div>
-                <div class="relative">
-                    <input type="text" placeholder="Search phones, laptops..." class="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-[#0F172A] focus:outline-none focus:border-[#2563EB]" />
-                    <i data-lucide="search" class="w-4 h-4 text-[#64748B] absolute left-3 top-3"></i>
-                </div>
-                <div class="pt-2 border-t border-slate-200 flex justify-between text-xs text-[#64748B]">
-                    <span>Active Listings: <strong class="text-[#0F172A]">1,240+</strong></span>
-                    <span>Sellers: <strong class="text-[#0F172A]">850+</strong></span>
                 </div>
             </div>
         </section>

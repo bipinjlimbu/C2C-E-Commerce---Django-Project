@@ -1,0 +1,73 @@
+{% load static %}
+<nav class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            
+            <div class="flex items-center flex-1 md:flex-initial">
+                <a href="/" class="flex-shrink-0 flex items-center mr-8">
+                    <i data-lucide="refresh-cw" class="text-[#10B981] mr-2"></i>
+                    <span class="text-xl font-bold tracking-wide text-[#2563EB]">Re<span class="text-[#0F172A]">Tech</span></span>
+                </a>
+
+                <div class="hidden md:flex space-x-6 font-medium">
+                    <a href="/products/" class="{% if request.path == '/products/' and not request.GET.category %}text-[#2563EB] border-b-2 border-[#2563EB]{% else %}text-slate-500 hover:text-[#2563EB]{% endif %} px-1 pt-1 text-sm transition">Shop All</a>
+                    <a href="/products/?category=paintings" class="{% if request.GET.category == 'paintings' %}text-[#2563EB] border-b-2 border-[#2563EB]{% else %}text-slate-500 hover:text-[#2563EB]{% endif %} px-1 pt-1 text-sm transition">Paintings</a>
+                    <a href="/products/?category=pottery" class="{% if request.GET.category == 'pottery' %}text-[#2563EB] border-b-2 border-[#2563EB]{% else %}text-slate-500 hover:text-[#2563EB]{% endif %} px-1 pt-1 text-sm transition">Pottery</a>
+                    <a href="/products/?category=accessories" class="{% if request.GET.category == 'accessories' %}text-[#2563EB] border-b-2 border-[#2563EB]{% else %}text-slate-500 hover:text-[#2563EB]{% endif %} px-1 pt-1 text-sm transition">Accessories</a>
+                </div>
+            </div>
+
+            <div class="hidden sm:block flex-1 max-w-md mx-8">
+                <form action="/products/" method="GET" class="relative m-0">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-lucide="search" class="h-4 w-4 text-slate-400"></i>
+                    </div>
+                    <input type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="Search" class="block w-full pl-9 pr-3 py-1.5 border border-slate-200 rounded-lg bg-slate-50 text-sm placeholder-slate-400 focus:outline-none focus:border-[#2563EB] focus:bg-white text-slate-800 transition">
+                </form>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <a href="/products/" class="text-slate-600 hover:text-[#2563EB] transition sm:hidden">
+                    <i data-lucide="search"></i>
+                </a>
+
+                {% if not request.user.is_staff %}
+                    <a href="/wishlist/" class="text-slate-600 hover:text-[#2563EB] transition relative">
+                        <i data-lucide="heart"></i>
+                    </a>
+                    <a href="/cart/" class="text-slate-600 hover:text-[#2563EB] transition relative mr-2">
+                        <i data-lucide="shopping-cart"></i>
+                        {% if user.is_authenticated and user.cart.items.exists %}
+                            <span class="absolute top-0 right-0 w-4 h-4 bg-red-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1">
+                                {{ user.cart.items.count }}
+                            </span>
+                        {% endif %}
+                    </a>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                    <div class="flex items-center space-x-3 border-l border-slate-200 pl-4">
+                        <a href="/profile/" class="block h-8 w-8 rounded-full overflow-hidden border border-slate-200 bg-slate-50 focus:outline-none">
+                            {% if user.profile_picture %}
+                                <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}" class="h-full w-full object-cover">
+                            {% else %}
+                                <div class="h-full w-full flex items-center justify-center text-[#2563EB] font-bold text-sm bg-blue-50">
+                                    {{ user.username|slice:":1"|upper }}
+                                </div>
+                            {% endif %}
+                        </a>
+                        <a href="/logout/" class="text-slate-600 hover:text-red-700 transition" title="Logout">
+                            <i data-lucide="log-out"></i>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="flex items-center space-x-2 border-l border-slate-200 pl-4">
+                        <a href="/login/" class="text-slate-600 hover:text-[#2563EB] text-sm font-medium px-2 py-1.5 transition">Login</a>
+                        <a href="/register/" class="bg-[#2563EB] text-white text-sm font-medium px-3 py-1.5 rounded-lg hover:bg-blue-700 transition shadow-sm">Register</a>
+                    </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</nav>
