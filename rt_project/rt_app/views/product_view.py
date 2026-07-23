@@ -1,11 +1,58 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Q
 from ..models import Product
 
 @login_required
 def products_view(request):
     products = Product.objects.all().order_by('-created_at')
+    
+    category = request.GET.get('category')
+    condition = request.GET.get('condition')
+    price_range = request.GET.get('price_range')
+    sort = request.GET.get('sort')
+    q = request.GET.get('q')
+    
+    if q:
+        products = products.filter(
+            Q(title__icontains=q) |
+            Q(brand__icontains=q) |
+            Q(model_name__icontains=q) |
+            Q(category__icontains=q) |
+            Q(condition__icontains=q)
+        )
+    
+    if category:
+        products = products.filter(category=category)
+    
+    if condition:
+        products = products.filter(condition=condition)
+        
+    if price_range:
+        if price_range == '0-999':
+            products = products.filter(price__lt=1000)
+        elif price_range == '1000-4999':
+            products = products.filter(price__gte=1000, price__lte=4999)
+        elif price_range == '5000-9999':
+            products = products.filter(price__gte=5000, price__lte=9999)
+        elif price_range == '10000-49999':
+            products = products.filter(price__gte=10000, price__lte=49999)
+        elif price_range == '50000-99999':
+            products = products.filter(price__gte=50000, price__lte=99999)
+        elif price_range == '100000-499999':
+            products = products.filter(price__gte=100000, price__lte=499999)
+        elif price_range == '500000+':
+            products = products.filter(price__gte=500000)
+            
+    if sort:
+        if sort == 'price_asc':
+            products = products.order_by('price')
+        elif sort == 'price_desc':
+            products = products.order_by('-price')
+        elif sort == 'oldest':
+            products = products.order_by('created_at')
+    
     return render(request, 'main/products_page.html', {'products': products})
 
 @login_required
