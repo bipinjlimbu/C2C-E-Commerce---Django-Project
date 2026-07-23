@@ -79,3 +79,18 @@ def is_active_toggle_view(request, product_id):
         messages.error(request, "Product not found or you do not have permission to modify it.")
     
     return redirect('/dashboard/?section=product-management')
+
+@login_required
+def delete_product_view(request, product_id):
+    if request.user.is_staff:
+        messages.error(request, "Access denied. Staff members cannot delete products.")
+        return redirect('/')
+    
+    try:
+        product = Product.objects.get(id=product_id, seller=request.user)
+        product.delete()
+        messages.success(request, "Product deleted successfully.")
+    except Product.DoesNotExist:
+        messages.error(request, "Product not found or you do not have permission to delete it.")
+    
+    return redirect('/dashboard/?section=product-management')
