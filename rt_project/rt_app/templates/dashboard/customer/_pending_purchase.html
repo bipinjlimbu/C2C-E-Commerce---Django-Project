@@ -141,12 +141,10 @@
                                             <span>Mark Received</span>
                                         </a>
                                     {% endif %}
-
-                                    {% if order.status == "confirmed" %}
-                                        <a href="/order/cancel/{{ order.id }}" class="bg-white hover:bg-red-50 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-600 h-10 w-10 rounded-xl transition-all flex items-center justify-center active:scale-95" title="Cancel Order">
-                                            <i data-lucide="x-circle" class="w-4 h-4"></i>
-                                        </a>
-                                    {% endif %}
+                                    
+                                    <a href="/order/cancel/{{ order.id }}" class="bg-white hover:bg-red-50 border border-slate-200 hover:border-red-200 text-slate-400 hover:text-red-600 h-10 w-10 rounded-xl transition-all flex items-center justify-center active:scale-95" title="Cancel Order">
+                                        <i data-lucide="x-circle" class="w-4 h-4"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
