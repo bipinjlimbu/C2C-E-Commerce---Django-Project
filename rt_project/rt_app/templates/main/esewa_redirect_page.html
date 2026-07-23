@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connecting Gateway | ReTech</title>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+<body class="bg-slate-50 flex items-center justify-center min-h-screen text-slate-800 font-sans antialiased px-4">
+
+    <div class="max-w-md w-full bg-white border border-slate-200/80 rounded-2xl p-8 sm:p-10 shadow-sm text-center space-y-6">
+        
+        <div class="relative w-24 h-24 mx-auto">
+            <div class="absolute inset-0 border-4 border-blue-100 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-[#2563EB] border-t-transparent rounded-full animate-spin"></div>
+            <div class="absolute inset-3 bg-blue-50/60 rounded-full flex items-center justify-center border border-blue-100 shadow-xs">
+                <i data-lucide="shield-check" class="w-8 h-8 text-[#2563EB] animate-pulse"></i>
+            </div>
+        </div>
+
+        <div class="space-y-2">
+            <h2 class="text-[#0F172A] font-extrabold text-2xl tracking-tight">
+                Connecting <span class="text-[#2563EB]">Gateway</span>
+            </h2>
+            <p class="text-[#64748B] text-xs font-semibold uppercase tracking-wider">
+                Encrypting secure payment connection...
+            </p>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-3 flex items-center justify-center gap-2 text-xs font-medium text-slate-600">
+            <i data-lucide="lock" class="w-4 h-4 text-[#10B981]"></i>
+            <span>Redirecting to eSewa Payment Gateway</span>
+        </div>
+
+        <form id="esewa_form" action="{{ esewa_url }}" method="POST">
+            <input type="hidden" name="amount" value="{{ amount }}">
+            <input type="hidden" name="tax_amount" value="0">
+            <input type="hidden" name="total_amount" value="{{ amount }}">
+            <input type="hidden" name="transaction_uuid" value="{{ transaction_uuid }}">
+            <input type="hidden" name="product_code" value="{{ product_code }}">
+            <input type="hidden" name="product_service_charge" value="0">
+            <input type="hidden" name="product_delivery_charge" value="0">
+            <input type="hidden" name="success_url" value="{{ success_url }}">
+            <input type="hidden" name="failure_url" value="{{ failure_url }}">
+            <input type="hidden" name="signed_field_names" value="total_amount,transaction_uuid,product_code">
+            <input type="hidden" name="signature" value="{{ signature }}">
+        </form>
+
+    </div>
+
+    <script src="{% static 'js/lucide.min.js' %}"></script>
+    <script>
+        lucide.createIcons();
+
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById('esewa_form').submit();
+            }, 800); 
+        };
+    </script>
+</body>
+</html>

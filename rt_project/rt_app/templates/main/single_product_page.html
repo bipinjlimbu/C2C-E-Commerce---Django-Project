@@ -158,8 +158,12 @@
                 {% if request.user != product.seller and not request.user.is_staff %}
                 <div id="checkoutSection" class="hidden bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm space-y-4">
                     <h3 class="text-sm font-bold text-[#0F172A] border-b border-slate-100 pb-2">Checkout Details</h3>
-                    <form method="POST" action="/checkout/{{ product.id }}/" class="space-y-4">
+                    <form method="POST" action="/payment/initiate/" class="space-y-4">
                         {% csrf_token %}
+                        
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <input type="hidden" name="buyer_id" value="{{ request.user.id }}">
+
                         <div class="space-y-1.5">
                             <label class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">Payment Method</label>
                             <select name="payment_method" required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-semibold text-[#0F172A] focus:outline-none focus:border-[#2563EB] focus:bg-white transition-all cursor-pointer">

@@ -531,6 +531,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   left: 0px;
 }
 
+.inset-3 {
+  top: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  left: 0.75rem;
+}
+
 .inset-y-0 {
   top: 0px;
   bottom: 0px;
@@ -919,6 +926,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-width: 200px;
 }
 
+.max-w-6xl {
+  max-width: 72rem;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -942,6 +953,26 @@ Ensure the default browser behavior of the `hidden` attribute.
 .translate-x-\[120\%\] {
   --tw-translate-x: 120%;
   transform: var(--tw-transform);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: .5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .cursor-pointer {
@@ -1304,6 +1335,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(243 232 255 / var(--tw-border-opacity));
 }
 
+.border-\[\#2563EB\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(37 99 235 / var(--tw-border-opacity));
+}
+
+.border-t-transparent {
+  border-top-color: transparent;
+}
+
 .bg-slate-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(248 250 252 / var(--tw-bg-opacity));
@@ -1436,6 +1476,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-purple-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(250 245 255 / var(--tw-bg-opacity));
+}
+
+.bg-blue-50\/60 {
+  background-color: rgb(239 246 255 / 0.6);
 }
 
 .bg-gradient-to-r {
@@ -1656,6 +1700,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pb-2 {
   padding-bottom: 0.5rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
 }
 
 .text-left {
@@ -2371,6 +2419,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .sm\:p-12 {
     padding: 3rem;
+  }
+
+  .sm\:p-10 {
+    padding: 2.5rem;
   }
 
   .sm\:px-6 {
