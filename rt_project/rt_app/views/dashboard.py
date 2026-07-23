@@ -19,11 +19,11 @@ def customer_dashboard_view(request):
     if section == 'product-management':
         context['products'] = Product.objects.filter(seller=request.user).order_by('-created_at')
         
-    elif section == 'pending-orders':
-        context['pending_orders'] = None
+    elif section == 'pending-sales':
+        context['pending_sales'] = Order.objects.filter(seller=request.user).exclude(status__in=[Order.Status.COMPLETED, Order.Status.CANCELLED]).order_by('-created_at')
         
     elif section == 'pending-purchase':
-        context['pending_purchase'] = Order.objects.exclude(seller=request.user, status__in=[Order.Status.COMPLETED, Order.Status.CANCELLED]).order_by('-created_at')
+        context['pending_purchase'] = Order.objects.filter(buyer=request.user).exclude(status__in=[Order.Status.COMPLETED, Order.Status.CANCELLED]).order_by('-created_at')
         
     elif section == 'order-history':
         context['order_history'] = None

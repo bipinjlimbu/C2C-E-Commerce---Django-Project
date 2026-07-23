@@ -57,9 +57,9 @@
             <div class="space-y-1">
                 <h3 class="px-4 text-[9px] font-bold text-[#64748B] uppercase tracking-widest mb-3">Orders & Purchases</h3>
                 
-                <a href="?section=pending-orders" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'pending-orders' %}bg-[#2563EB] text-white shadow-md font-semibold{% else %}text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
+                <a href="?section=pending-sales" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'pending-sales' %}bg-[#2563EB] text-white shadow-md font-semibold{% else %}text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
                     <i data-lucide="clock" class="w-4 h-4 transition-transform group-hover:scale-105"></i>
-                    Pending Orders
+                    Pending Sales
                 </a>
 
                 <a href="?section=pending-purchase" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'pending-purchase' %}bg-[#2563EB] text-white shadow-md font-semibold{% else %}text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
@@ -129,8 +129,8 @@
         {% if section == 'product-management' or not section %}
             {% include 'dashboard/customer/_product_management.html' %}
 
-        {% elif section == 'pending-orders' %}
-            {% include 'dashboard/customer/_pending_orders.html' %}
+        {% elif section == 'pending-sales' %}
+            {% include 'dashboard/customer/_pending_sales.html' %}
 
         {% elif section == 'pending-purchase' %}
             {% include 'dashboard/customer/_pending_purchase.html' %}
