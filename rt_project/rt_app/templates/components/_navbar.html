@@ -35,14 +35,6 @@
                     <a href="/wishlist/" class="text-slate-600 hover:text-[#2563EB] transition relative">
                         <i data-lucide="heart"></i>
                     </a>
-                    <a href="/cart/" class="text-slate-600 hover:text-[#2563EB] transition relative mr-2">
-                        <i data-lucide="shopping-cart"></i>
-                        {% if user.is_authenticated and user.cart.items.exists %}
-                            <span class="absolute top-0 right-0 w-4 h-4 bg-red-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center transform translate-x-1 -translate-y-1">
-                                {{ user.cart.items.count }}
-                            </span>
-                        {% endif %}
-                    </a>
                 {% endif %}
 
                 {% if user.is_authenticated %}
