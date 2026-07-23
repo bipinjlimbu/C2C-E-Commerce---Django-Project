@@ -3,6 +3,23 @@
     <title>Home - ReTech</title>
     {% load static %}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2563eb;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #1d4ed8;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 
 <body class="bg-[#F8FAFC] text-[#0F172A] antialiased min-h-screen">
@@ -25,40 +42,93 @@
                     Upgrade your setup or turn your old devices into cash. Safe, local, and direct C2C electronics trading.
                 </p>
                 <div class="flex flex-wrap gap-4 pt-2">
-                    <a href="#" class="inline-flex items-center gap-2 px-6 py-3 bg-[#2563EB] hover:bg-blue-700 text-white font-medium rounded-xl shadow-sm transition-colors">
+                    <a href="/products/" class="inline-flex items-center gap-2 px-6 py-3 bg-[#2563EB] hover:bg-blue-700 text-white font-medium rounded-xl shadow-sm transition-colors">
                         <i data-lucide="shopping-bag" class="w-5 h-5"></i> Browse Listings
                     </a>
-                    <a href="#" class="inline-flex items-center gap-2 px-6 py-3 bg-[#F8FAFC] hover:bg-slate-100 text-[#0F172A] font-medium rounded-xl border border-slate-200 transition-colors">
-                        <i data-lucide="plus-circle" class="w-5 h-5 text-[#2563EB]"></i> Sell an Item
+                    <a href="/dashboard/" class="inline-flex items-center gap-2 px-6 py-3 bg-[#F8FAFC] hover:bg-slate-100 text-[#0F172A] font-medium rounded-xl border border-slate-200 transition-colors">
+                        <i data-lucide="layout-dashboard" class="w-5 h-5 text-[#2563EB]"></i> Go to Dashboard
                     </a>
                 </div>
             </div>
         </section>
 
         <section class="space-y-4">
-            <div class="flex justify-between items-center">
-                <h2 class="text-2xl font-bold text-[#0F172A]">Popular Categories</h2>
-                <a href="#" class="text-sm font-semibold text-[#2563EB] hover:underline flex items-center gap-1">
-                    View all <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
+            <div class="flex justify-between items-end">
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-[#2563EB]">Explore Marketplace</h2>
+                    <p class="text-2xl font-bold text-[#0F172A]">Popular Categories</p>
+                </div>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                {% for i in '123456' %}
-                <a href="#" class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm hover:border-[#2563EB] transition-all flex flex-col items-center text-center space-y-2 group">
-                    <div class="p-3 bg-[#F8FAFC] group-hover:bg-[#2563EB]/10 rounded-full text-[#2563EB] transition-colors">
-                        <i data-lucide="smartphone" class="w-6 h-6"></i>
+            <div class="flex overflow-x-auto gap-6 pb-4 snap-x snap-mandatory custom-scrollbar">
+                
+                <a href="/products/?category=smartphones" class="group min-w-[260px] sm:min-w-[300px] snap-start bg-white border border-slate-200 p-5 rounded-xl shadow-sm hover:border-[#2563EB] transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-slate-900 group-hover:text-[#2563EB] transition-colors">Smartphones</h3>
+                        <p class="text-xs text-slate-500">Smartphones & Mobile</p>
                     </div>
-                    <span class="text-sm font-semibold text-[#0F172A]">Smartphones</span>
+                    <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-200 group-hover:bg-blue-50 group-hover:border-[#2563EB] transition-colors shrink-0 ml-4">
+                        <i data-lucide="smartphone" class="w-5 h-5 text-slate-500 group-hover:text-[#2563EB] transition-colors"></i>
+                    </div>
                 </a>
-                {% endfor %}
+
+                <a href="/products/?category=laptops" class="group min-w-[260px] sm:min-w-[300px] snap-start bg-white border border-slate-200 p-5 rounded-xl shadow-sm hover:border-[#2563EB] transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-slate-900 group-hover:text-[#2563EB] transition-colors">Laptops</h3>
+                        <p class="text-xs text-slate-500">Laptops & Computers</p>
+                    </div>
+                    <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-200 group-hover:bg-blue-50 group-hover:border-[#2563EB] transition-colors shrink-0 ml-4">
+                        <i data-lucide="laptop" class="w-5 h-5 text-slate-500 group-hover:text-[#2563EB] transition-colors"></i>
+                    </div>
+                </a>
+
+                <a href="/products/?category=audio" class="group min-w-[260px] sm:min-w-[300px] snap-start bg-white border border-slate-200 p-5 rounded-xl shadow-sm hover:border-[#2563EB] transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-slate-900 group-hover:text-[#2563EB] transition-colors">Audio</h3>
+                        <p class="text-xs text-slate-500">Headphones & Audio</p>
+                    </div>
+                    <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-200 group-hover:bg-blue-50 group-hover:border-[#2563EB] transition-colors shrink-0 ml-4">
+                        <i data-lucide="headphones" class="w-5 h-5 text-slate-500 group-hover:text-[#2563EB] transition-colors"></i>
+                    </div>
+                </a>
+
+                <a href="/products/?category=gaming" class="group min-w-[260px] sm:min-w-[300px] snap-start bg-white border border-slate-200 p-5 rounded-xl shadow-sm hover:border-[#2563EB] transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-slate-900 group-hover:text-[#2563EB] transition-colors">Gaming</h3>
+                        <p class="text-xs text-slate-500">Consoles & Gaming</p>
+                    </div>
+                    <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-200 group-hover:bg-blue-50 group-hover:border-[#2563EB] transition-colors shrink-0 ml-4">
+                        <i data-lucide="gamepad-2" class="w-5 h-5 text-slate-500 group-hover:text-[#2563EB] transition-colors"></i>
+                    </div>
+                </a>
+
+                <a href="/products/?category=components" class="group min-w-[260px] sm:min-w-[300px] snap-start bg-white border border-slate-200 p-5 rounded-xl shadow-sm hover:border-[#2563EB] transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-slate-900 group-hover:text-[#2563EB] transition-colors">Components</h3>
+                        <p class="text-xs text-slate-500">PC Parts & Accessories</p>
+                    </div>
+                    <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-200 group-hover:bg-blue-50 group-hover:border-[#2563EB] transition-colors shrink-0 ml-4">
+                        <i data-lucide="cpu" class="w-5 h-5 text-slate-500 group-hover:text-[#2563EB] transition-colors"></i>
+                    </div>
+                </a>
+
+                <a href="/products/?category=wearables" class="group min-w-[260px] sm:min-w-[300px] snap-start bg-white border border-slate-200 p-5 rounded-xl shadow-sm hover:border-[#2563EB] transition-all flex items-center justify-between">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-slate-900 group-hover:text-[#2563EB] transition-colors">Wearables</h3>
+                        <p class="text-xs text-slate-500">Smartwatches & Tech</p>
+                    </div>
+                    <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-200 group-hover:bg-blue-50 group-hover:border-[#2563EB] transition-colors shrink-0 ml-4">
+                        <i data-lucide="watch" class="w-5 h-5 text-slate-500 group-hover:text-[#2563EB] transition-colors"></i>
+                    </div>
+                </a>
+
             </div>
         </section>
 
         <section class="space-y-4">
             <div class="flex justify-between items-center">
                 <h2 class="text-2xl font-bold text-[#0F172A]">Recent Tech Listings</h2>
-                <a href="#" class="text-sm font-semibold text-[#2563EB] hover:underline flex items-center gap-1">
+                <a href="/products/" class="text-sm font-semibold text-[#2563EB] hover:underline flex items-center gap-1">
                     Browse all <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </a>
             </div>
