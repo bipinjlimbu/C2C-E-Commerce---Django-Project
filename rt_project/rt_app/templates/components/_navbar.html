@@ -3,21 +3,21 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 items-center">
             
-            <div class="flex items-center flex-1 md:flex-initial">
-                <a href="/" class="flex-shrink-0 flex items-center mr-8">
-                    <i data-lucide="refresh-cw" class="text-[#10B981] mr-2"></i>
+            <div class="flex items-center space-x-6">
+                <a href="/" class="flex-shrink-0 flex items-center mr-2">
+                    <i data-lucide="refresh-cw" class="text-[#10B981] mr-2 h-6 w-6"></i>
                     <span class="text-xl font-bold tracking-wide text-[#2563EB]">Re<span class="text-[#0F172A]">Tech</span></span>
                 </a>
 
-                <div class="hidden md:flex space-x-6 font-medium">
+                <div class="hidden lg:flex space-x-5 font-medium">
                     <a href="/products/" class="{% if request.path == '/products/' and not request.GET.category %}text-[#2563EB] border-b-2 border-[#2563EB]{% else %}text-slate-500 hover:text-[#2563EB]{% endif %} px-1 pt-1 text-sm transition">Shop All</a>
-                    <a href="/products/?category=paintings" class="{% if request.GET.category == 'paintings' %}text-[#2563EB] border-b-2 border-[#2563EB]{% else %}text-slate-500 hover:text-[#2563EB]{% endif %} px-1 pt-1 text-sm transition">Paintings</a>
-                    <a href="/products/?category=pottery" class="{% if request.GET.category == 'pottery' %}text-[#2563EB] border-b-2 border-[#2563EB]{% else %}text-slate-500 hover:text-[#2563EB]{% endif %} px-1 pt-1 text-sm transition">Pottery</a>
-                    <a href="/products/?category=accessories" class="{% if request.GET.category == 'accessories' %}text-[#2563EB] border-b-2 border-[#2563EB]{% else %}text-slate-500 hover:text-[#2563EB]{% endif %} px-1 pt-1 text-sm transition">Accessories</a>
+                    <a href="/products/?category=smartphones" class="{% if request.GET.category == 'smartphones' %}text-[#2563EB] border-b-2 border-[#2563EB]{% else %}text-slate-500 hover:text-[#2563EB]{% endif %} px-1 pt-1 text-sm transition">Smartphones</a>
+                    <a href="/products/?category=laptops" class="{% if request.GET.category == 'laptops' %}text-[#2563EB] border-b-2 border-[#2563EB]{% else %}text-slate-500 hover:text-[#2563EB]{% endif %} px-1 pt-1 text-sm transition">Laptops</a>
+                    <a href="/products/?category=gaming" class="{% if request.GET.category == 'gaming' %}text-[#2563EB] border-b-2 border-[#2563EB]{% else %}text-slate-500 hover:text-[#2563EB]{% endif %} px-1 pt-1 text-sm transition">Gaming</a>
                 </div>
             </div>
 
-            <div class="hidden sm:block flex-1 max-w-md mx-8">
+            <div class="hidden md:block flex-1 max-w-sm mx-4">
                 <form action="/products/" method="GET" class="relative m-0">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i data-lucide="search" class="h-4 w-4 text-slate-400"></i>
@@ -27,35 +27,39 @@
             </div>
 
             <div class="flex items-center space-x-4">
-                <a href="/products/" class="text-slate-600 hover:text-[#2563EB] transition sm:hidden">
-                    <i data-lucide="search"></i>
+                <a href="/products/" class="text-slate-600 hover:text-[#2563EB] transition md:hidden">
+                    <i data-lucide="search" class="h-5 w-5"></i>
                 </a>
 
-                {% if not request.user.is_staff %}
-                    <a href="/wishlist/" class="text-slate-600 hover:text-[#2563EB] transition relative">
-                        <i data-lucide="heart"></i>
-                    </a>
-                {% endif %}
-
                 {% if user.is_authenticated %}
+                    <a href="/wishlist/" class="text-slate-600 hover:text-[#2563EB] transition relative p-1">
+                        <i data-lucide="heart" class="h-5 w-5"></i>
+                    </a>
+
                     <div class="flex items-center space-x-3 border-l border-slate-200 pl-4">
-                        <a href="/profile/" class="block h-8 w-8 rounded-full overflow-hidden border border-slate-200 bg-slate-50 focus:outline-none">
-                            {% if user.profile_picture %}
-                                <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}" class="h-full w-full object-cover">
-                            {% else %}
-                                <div class="h-full w-full flex items-center justify-center text-[#2563EB] font-bold text-sm bg-blue-50">
-                                    {{ user.username|slice:":1"|upper }}
-                                </div>
-                            {% endif %}
+                        <a href="/profile/" class="flex items-center space-x-2 py-1 px-2 rounded-full hover:bg-slate-100 transition group">
+                            <div class="h-8 w-8 rounded-full overflow-hidden border border-slate-200 bg-slate-50 flex-shrink-0">
+                                {% if user.profile_picture %}
+                                    <img src="{{ user.profile_picture.url }}" alt="{{ user.username }}" class="h-full w-full object-cover">
+                                {% else %}
+                                    <div class="h-full w-full flex items-center justify-center text-[#2563EB] font-bold text-xs bg-blue-50">
+                                        {{ user.username|slice:":1"|upper }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <span class="text-sm font-semibold text-slate-700 group-hover:text-[#2563EB] transition">
+                                {{ user.username }}
+                            </span>
                         </a>
-                        <a href="/logout/" class="text-slate-600 hover:text-red-700 transition" title="Logout">
-                            <i data-lucide="log-out"></i>
+
+                        <a href="/logout/" class="text-slate-400 hover:text-red-600 transition p-1" title="Logout">
+                            <i data-lucide="log-out" class="h-5 w-5"></i>
                         </a>
                     </div>
                 {% else %}
                     <div class="flex items-center space-x-2 border-l border-slate-200 pl-4">
                         <a href="/login/" class="text-slate-600 hover:text-[#2563EB] text-sm font-medium px-2 py-1.5 transition">Login</a>
-                        <a href="/register/" class="bg-[#2563EB] text-white text-sm font-medium px-3 py-1.5 rounded-lg hover:bg-blue-700 transition shadow-sm">Register</a>
+                        <a href="/register/" class="bg-[#2563EB] text-white text-sm font-medium px-3.5 py-1.5 rounded-lg hover:bg-blue-700 transition shadow-sm">Register</a>
                     </div>
                 {% endif %}
             </div>
