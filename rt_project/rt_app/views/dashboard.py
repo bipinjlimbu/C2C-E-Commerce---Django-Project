@@ -1,0 +1,45 @@
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from ..models import User
+
+@login_required
+def customer_dashboard_view(request):
+    if request.user.is_staff:
+        messages.error(request, "Access denied. Staff members cannot access the customer dashboard.")
+        return redirect('/')
+    
+    section = request.GET.get('section', 'product-management')
+    
+    context = {
+        'section': section,
+    }
+    
+    if section == 'product-management':
+        context['products'] = None
+        
+    elif section == 'pending-orders':
+        context['pending_orders'] = None
+        
+    elif section == 'pending-purchase':
+        context['pending_purchase'] = None
+        
+    elif section == 'order-history':
+        context['order_history'] = None
+        
+    elif section == 'purchase-history':
+        context['purchase_history'] = None
+        
+    elif section == 'reviews-received':
+        context['reviews_received'] = None
+        
+    elif section == 'reviews-provided':
+        context['reviews_provided'] = None
+        
+    elif section == 'total-earning':
+        context['total_earning'] = None
+        
+    elif section == 'total-spent':
+        context['total_spent'] = None
+        
+    return render(request, 'dashboard/customer_dashboard.html', context)
