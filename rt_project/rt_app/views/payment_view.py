@@ -176,3 +176,8 @@ def payment_success_view(request):
     else:
         messages.error(request, "Payment verification failed or transaction incomplete.")
         return redirect('payment_failed')
+
+
+def payment_failed_view(request):
+    messages.error(request, "Payment failed or was cancelled by user.")
+    return render(request, 'main/payment_failed_page.html')
