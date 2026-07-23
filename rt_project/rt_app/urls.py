@@ -4,6 +4,7 @@ from .views.auth_view import register_view, login_view, logout_view
 from .views.profile_view import profile_view, edit_profile_view, delete_profile_view
 from .views.product_view import add_product_view, delete_product_view, edit_product_view, is_active_toggle_view, products_view, product_detail_view
 from .views.payment_view import initiate_payment_view, payment_success_view, payment_failed_view
+from .views.order_view import ship_order_view
 from .views.dashboard import customer_dashboard_view
 
 urlpatterns = [
@@ -23,5 +24,6 @@ urlpatterns = [
     path('payment/initiate/', initiate_payment_view, name='initiate_payment'),
     path('payment/success/', payment_success_view, name='payment_success'),
     path('payment/failed/', payment_failed_view, name='payment_failed'),
+    path('order/ship/<int:order_id>/', ship_order_view, name='ship_order'),
     path('dashboard/', customer_dashboard_view, name='customer_dashboard'),
 ]
