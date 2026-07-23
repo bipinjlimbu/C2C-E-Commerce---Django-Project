@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed | ReTech</title>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+
+<body class="bg-slate-50 flex flex-col min-h-screen text-slate-800 font-sans antialiased">
+    {% include 'components/_navbar.html' %}
+
+    {% include 'components/_messages.html' %}
+
+    <main class="flex-grow flex items-center justify-center py-12 px-4">
+        <div class="bg-white rounded-2xl shadow-sm max-w-md w-full p-8 sm:p-10 text-center border border-slate-200/80 border-b-[6px] border-b-[#10B981]">
+            
+            <div class="flex justify-center mb-6">
+                <div class="bg-emerald-50 p-5 rounded-full relative border border-emerald-100 flex items-center justify-center">
+                    <i data-lucide="check-circle-2" class="w-12 h-12 text-[#10B981]"></i>
+                </div>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight uppercase mb-1">
+                Order <span class="text-[#10B981]">Confirmed</span>
+            </h2>
+            <p class="text-[#64748B] mb-8 text-xs font-semibold">Your purchase order has been processed successfully.</p>
+
+            <div class="bg-slate-50 rounded-xl p-6 mb-8 text-left border border-slate-200/60 divide-y divide-slate-200/60">
+                <p class="flex justify-between py-3 items-center">
+                    <strong class="text-[#64748B] uppercase text-[10px] tracking-wider font-bold">Order ID</strong> 
+                    <span class="text-[#0F172A] font-bold font-mono">#{{ order.id }}</span>
+                </p>
+                <p class="flex justify-between py-3 items-center">
+                    <strong class="text-[#64748B] uppercase text-[10px] tracking-wider font-bold">Transaction Ref</strong> 
+                    <span class="text-slate-700 text-xs font-mono font-medium truncate ml-4">{{ order.transaction_id }}</span>
+                </p>
+                <p class="flex justify-between py-3 pt-4 items-baseline">
+                    <strong class="text-[#64748B] uppercase text-[10px] tracking-wider font-bold">Total Settled</strong> 
+                    <span class="text-[#10B981] font-extrabold text-xl font-mono">NPR {{ order.total_amount|floatformat:2 }}</span>
+                </p>
+            </div>
+
+            <a href="/" class="group flex items-center justify-center w-full bg-[#2563EB] text-white py-3.5 px-4 rounded-xl font-bold text-sm hover:bg-blue-700 transition-all shadow-sm">
+                Return to Store
+                <i data-lucide="arrow-right" class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+    </main>
+
+    {% include 'components/_footer.html' %}
+
+    <script src="{% static 'js/lucide.min.js' %}"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
