@@ -2,7 +2,7 @@ from django.urls import path
 from .views.main_view import home_view
 from .views.auth_view import register_view, login_view, logout_view
 from .views.profile_view import profile_view, edit_profile_view, delete_profile_view
-from .views.product_view import add_product_view, delete_product_view, edit_product_view, is_active_toggle_view, products_view
+from .views.product_view import add_product_view, delete_product_view, edit_product_view, is_active_toggle_view, products_view, product_detail_view
 from .views.dashboard import customer_dashboard_view
 
 urlpatterns = [
@@ -18,5 +18,6 @@ urlpatterns = [
     path('products/edit/<int:product_id>/', edit_product_view, name='edit_product'),
     path('products/delete/<int:product_id>/', delete_product_view, name='delete_product'),
     path('products/status/toggle/<int:product_id>/', is_active_toggle_view, name='toggle_product_active'),
+    path('products/<int:product_id>/', product_detail_view, name='product_detail'),
     path('dashboard/', customer_dashboard_view, name='customer_dashboard'),
 ]

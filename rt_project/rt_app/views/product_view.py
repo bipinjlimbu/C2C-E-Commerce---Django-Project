@@ -212,3 +212,13 @@ def delete_product_view(request, product_id):
         messages.error(request, "Product not found or you do not have permission to delete it.")
     
     return redirect('/dashboard/?section=product-management')
+
+@login_required
+def product_detail_view(request, product_id):
+    product = Product.objects.filter(id=product_id).first()
+    
+    if not product:
+        messages.error(request, "Product not found.")
+        return redirect('/products/')
+    
+    return render(request, 'main/single_product_page.html', {'product': product})
