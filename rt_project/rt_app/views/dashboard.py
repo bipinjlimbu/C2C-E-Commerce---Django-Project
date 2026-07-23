@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from ..models import User
+from ..models import User, Product, Order, Review
 
 @login_required
 def customer_dashboard_view(request):
@@ -16,7 +16,7 @@ def customer_dashboard_view(request):
     }
     
     if section == 'product-management':
-        context['products'] = None
+        context['products'] = Product.objects.filter(seller=request.user).order_by('-created_at')
         
     elif section == 'pending-orders':
         context['pending_orders'] = None
