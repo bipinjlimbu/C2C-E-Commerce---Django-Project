@@ -74,6 +74,7 @@ class Order(models.Model):
         DELIVERED = 'delivered', 'Delivered'
         COMPLETED = 'completed', 'Completed'
         CANCELLED = 'cancelled', 'Cancelled'
+        REJECTED = 'rejected', 'Rejected'
 
     class PaymentMethod(models.TextChoices):
         ESEWA = 'esewa', 'eSewa'
