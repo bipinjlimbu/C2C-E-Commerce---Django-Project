@@ -13,6 +13,7 @@ def customer_dashboard_view(request):
     
     context = {
         'section': section,
+        'active_count': Product.objects.filter(seller=request.user, is_active=True).count(),
     }
     
     if section == 'product-management':

@@ -29,13 +29,7 @@
             <div>
                 <p class="text-xs font-bold uppercase tracking-wider text-[#64748B]">Active Listings</p>
                 <h3 class="text-2xl font-extrabold text-[#0F172A] mt-0.5">
-                    {% if products %}
-                        {% with active_count=0 %}
-                            {{ products.all.count }}
-                        {% endwith %}
-                    {% else %}
-                        0
-                    {% endif %}
+                    {{ active_count }}
                 </h3>
             </div>
         </div>

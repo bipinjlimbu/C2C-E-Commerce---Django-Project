@@ -62,3 +62,20 @@ def add_product_view(request):
         return redirect('/dashboard/?section=product-management')
         
     return render(request, 'main/add_product_page.html')
+
+@login_required
+def is_active_toggle_view(request, product_id):
+    if request.user.is_staff:
+        messages.error(request, "Access denied. Staff members cannot modify products.")
+        return redirect('/')
+    
+    try:
+        product = Product.objects.get(id=product_id, seller=request.user)
+        product.is_active = not product.is_active
+        product.save()
+        status = "activated" if product.is_active else "deactivated"
+        messages.success(request, f"Product {status} successfully.")
+    except Product.DoesNotExist:
+        messages.error(request, "Product not found or you do not have permission to modify it.")
+    
+    return redirect('/dashboard/?section=product-management')
