@@ -70,23 +70,23 @@
                         <td class="py-4 px-6">
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 overflow-hidden">
-                                    {% if product.image %}
-                                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                                    {% if product.product_image %}
+                                        <img src="{{ product.product_image.url }}" alt="{{ product.title }}" class="w-full h-full object-cover">
                                     {% else %}
                                         <i data-lucide="package" class="w-5 h-5 text-slate-400"></i>
                                     {% endif %}
                                 </div>
                                 <div>
-                                    <p class="font-bold text-[#0F172A] hover:text-[#2563EB] transition-colors cursor-pointer">{{ product.name }}</p>
+                                    <p class="font-bold text-[#0F172A] hover:text-[#2563EB] transition-colors cursor-pointer">{{ product.title }}</p>
                                     <p class="text-[10px] text-[#64748B] mt-0.5">Model: {{ product.model_name|default:"N/A" }}</p>
                                 </div>
                             </div>
                         </td>
                         <td class="py-4 px-6 font-semibold text-[#0F172A]">{{ product.brand|default:"-" }}</td>
-                        <td class="py-4 px-6 text-[#64748B] font-semibold">{{ product.category|default:"General" }}</td>
+                        <td class="py-4 px-6 text-[#64748B] font-semibold">{{ product.get_category_display|default:"General" }}</td>
                         <td class="py-4 px-6">
                             <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
-                                {{ product.condition|default:"Used" }}
+                                {{ product.get_condition_display|default:"Used" }}
                             </span>
                         </td>
                         <td class="py-4 px-6 font-bold text-[#0F172A]">NPR {{ product.price }}</td>

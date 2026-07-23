@@ -2,6 +2,7 @@ from django.urls import path
 from .views.main_view import home_view
 from .views.auth_view import register_view, login_view, logout_view
 from .views.profile_view import profile_view, edit_profile_view, delete_profile_view
+from .views.product_view import add_product_view
 from .views.dashboard import customer_dashboard_view
 
 urlpatterns = [
@@ -12,5 +13,6 @@ urlpatterns = [
     path('profile/', profile_view, name='profile'),
     path('profile/edit/', edit_profile_view, name='edit_profile'),
     path('profile/delete/<int:user_id>/', delete_profile_view, name='delete_profile'),
+    path('products/add/', add_product_view, name='add_product'),
     path('dashboard/', customer_dashboard_view, name='customer_dashboard'),
 ]
