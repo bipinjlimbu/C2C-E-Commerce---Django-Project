@@ -21,3 +21,22 @@ def ship_order_view(request, order_id):
         messages.error(request, "Order not found or you do not have permission to update it.")
     
     return redirect('/dashboard/?section=pending-sales')
+
+@login_required
+def reject_order_view(request, order_id):
+    if request.user.is_staff:
+        messages.error(request, "Access denied. Staff members cannot reject orders.")
+        return redirect('/')
+    
+    try:
+        order = Order.objects.get(id=order_id, seller=request.user)
+        if order.status == Order.Status.CONFIRMED:
+            order.status = Order.Status.REJECTED
+            order.save()
+            messages.success(request, "Order has been rejected.")
+        else:
+            messages.error(request, "Order cannot be rejected in its current status.")
+    except Order.DoesNotExist:
+        messages.error(request, "Order not found or you do not have permission to update it.")
+    
+    return redirect('/dashboard/?section=sales-history')

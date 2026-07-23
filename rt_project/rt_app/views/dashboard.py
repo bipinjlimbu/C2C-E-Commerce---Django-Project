@@ -25,8 +25,8 @@ def customer_dashboard_view(request):
     elif section == 'pending-purchase':
         context['pending_purchase'] = Order.objects.filter(buyer=request.user).exclude(status__in=[Order.Status.COMPLETED, Order.Status.CANCELLED, Order.Status.REJECTED]).order_by('-created_at')
         
-    elif section == 'order-history':
-        context['order_history'] = None
+    elif section == 'sales-history':
+        context['sales_history'] = None
         
     elif section == 'purchase-history':
         context['purchase_history'] = None

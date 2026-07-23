@@ -67,9 +67,9 @@
                     Pending Purchase
                 </a>
                 
-                <a href="?section=order-history" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'order-history' %}bg-[#2563EB] text-white shadow-md font-semibold{% else %}text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
+                <a href="?section=order-history" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'sales-history' %}bg-[#2563EB] text-white shadow-md font-semibold{% else %}text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
                     <i data-lucide="history" class="w-4 h-4 transition-transform group-hover:scale-105"></i>
-                    Order History
+                    Sales History
                 </a>
 
                 <a href="?section=purchase-history" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'purchase-history' %}bg-[#2563EB] text-white shadow-md font-semibold{% else %}text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
@@ -135,8 +135,8 @@
         {% elif section == 'pending-purchase' %}
             {% include 'dashboard/customer/_pending_purchase.html' %}
 
-        {% elif section == 'order-history' %}
-            {% include 'dashboard/customer/_order_history.html' %}
+        {% elif section == 'sales-history' %}
+            {% include 'dashboard/customer/_sales_history.html' %}
 
         {% elif section == 'purchase-history' %}
             {% include 'dashboard/customer/_purchase_history.html' %}
