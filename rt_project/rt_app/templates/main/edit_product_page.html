@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product | ReTech</title>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+<body class="bg-slate-50 font-sans min-h-screen flex flex-col text-slate-800">
+
+    {% include 'components/_navbar.html' %}
+
+    {% include 'components/_messages.html' %}
+
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 lg:p-8">
+        <form method="POST" enctype="multipart/form-data" class="w-full max-w-4xl bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-sm p-6 sm:p-8 lg:p-10 space-y-8">
+            {% csrf_token %}
+            
+            <div class="border-b border-slate-100 pb-5 flex items-center justify-between">
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-[#2563EB]">C2C Marketplace</h2>
+                    <h1 class="text-2xl font-bold text-[#0F172A] tracking-tight mt-0.5">Edit Product Listing</h1>
+                </div>
+                <div class="h-10 w-10 rounded-xl bg-blue-50 text-[#2563EB] flex items-center justify-center shrink-0">
+                    <i data-lucide="edit-3" class="w-5 h-5"></i>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="space-y-6 md:col-span-2">
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl focus-within:border-[#2563EB] focus-within:bg-white transition-all">
+                        <label for="id_title" class="text-[10px] font-bold uppercase tracking-wider text-[#64748B] block mb-1">Listing Title <span class="text-rose-500">*</span></label>
+                        <input type="text" id="id_title" name="title" {% if data %} value="{{ data.title }}" {% else %} value="{{ product.title }}" {% endif %} maxlength="255" placeholder="e.g. iPhone 13 Pro Max 256GB - Sierra Blue" class="w-full bg-transparent text-sm font-semibold text-[#0F172A] focus:outline-none placeholder-slate-400">
+                        {% if errors.title %}
+                            <p class="text-rose-600 text-xs mt-1 font-medium">{{ errors.title }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl focus-within:border-[#2563EB] focus-within:bg-white transition-all">
+                    <label for="id_category" class="text-[10px] font-bold uppercase tracking-wider text-[#64748B] block mb-1">Category <span class="text-rose-500">*</span></label>
+                    <select id="id_category" name="category" class="w-full bg-transparent text-sm font-semibold text-[#0F172A] focus:outline-none cursor-pointer">
+                        <option value="" disabled class="text-slate-400">Select Tech Category</option>
+                        <option value="smartphones" {% if data %}{% if data.category == 'smartphones' %}selected{% endif %}{% else %}{% if product.category == 'smartphones' %}selected{% endif %}{% endif %}>Smartphones & Mobile</option>
+                        <option value="laptops" {% if data %}{% if data.category == 'laptops' %}selected{% endif %}{% else %}{% if product.category == 'laptops' %}selected{% endif %}{% endif %}>Laptops & Computers</option>
+                        <option value="audio" {% if data %}{% if data.category == 'audio' %}selected{% endif %}{% else %}{% if product.category == 'audio' %}selected{% endif %}{% endif %}>Headphones & Audio</option>
+                        <option value="gaming" {% if data %}{% if data.category == 'gaming' %}selected{% endif %}{% else %}{% if product.category == 'gaming' %}selected{% endif %}{% endif %}>Consoles & Gaming</option>
+                        <option value="components" {% if data %}{% if data.category == 'components' %}selected{% endif %}{% else %}{% if product.category == 'components' %}selected{% endif %}{% endif %}>PC Parts & Accessories</option>
+                        <option value="wearables" {% if data %}{% if data.category == 'wearables' %}selected{% endif %}{% else %}{% if product.category == 'wearables' %}selected{% endif %}{% endif %}>Smartwatches & Tech</option>
+                    </select>
+                    {% if errors.category %}
+                        <p class="text-rose-600 text-xs mt-1 font-medium">{{ errors.category }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl focus-within:border-[#2563EB] focus-within:bg-white transition-all">
+                    <label for="id_condition" class="text-[10px] font-bold uppercase tracking-wider text-[#64748B] block mb-1">Item Condition <span class="text-rose-500">*</span></label>
+                    <select id="id_condition" name="condition" class="w-full bg-transparent text-sm font-semibold text-[#0F172A] focus:outline-none cursor-pointer">
+                        <option value="like_new" {% if data %}{% if data.condition == 'like_new' %}selected{% endif %}{% else %}{% if product.condition == 'like_new' %}selected{% endif %}{% endif %}>Like New</option>
+                        <option value="excellent" {% if data %}{% if data.condition == 'excellent' %}selected{% endif %}{% else %}{% if product.condition == 'excellent' %}selected{% endif %}{% endif %}>Excellent</option>
+                        <option value="good" {% if data %}{% if data.condition == 'good' %}selected{% endif %}{% else %}{% if product.condition == 'good' or not product.condition %}selected{% endif %}{% endif %}>Good</option>
+                        <option value="fair" {% if data %}{% if data.condition == 'fair' %}selected{% endif %}{% else %}{% if product.condition == 'fair' %}selected{% endif %}{% endif %}>Fair</option>
+                        <option value="for_parts" {% if data %}{% if data.condition == 'for_parts' %}selected{% endif %}{% else %}{% if product.condition == 'for_parts' %}selected{% endif %}{% endif %}>For Parts / Not Working</option>
+                    </select>
+                    {% if errors.condition %}
+                        <p class="text-rose-600 text-xs mt-1 font-medium">{{ errors.condition }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl focus-within:border-[#2563EB] focus-within:bg-white transition-all">
+                    <label for="id_brand" class="text-[10px] font-bold uppercase tracking-wider text-[#64748B] block mb-1">Brand <span class="text-rose-500">*</span></label>
+                    <input type="text" id="id_brand" name="brand" {% if data %} value="{{ data.brand }}" {% else %} value="{{ product.brand }}" {% endif %} placeholder="e.g. Apple, Samsung, Sony" class="w-full bg-transparent text-sm font-semibold text-[#0F172A] focus:outline-none placeholder-slate-400">
+                    {% if errors.brand %}
+                        <p class="text-rose-600 text-xs mt-1 font-medium">{{ errors.brand }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl focus-within:border-[#2563EB] focus-within:bg-white transition-all">
+                    <label for="id_model_name" class="text-[10px] font-bold uppercase tracking-wider text-[#64748B] block mb-1">Model Name / Number</label>
+                    <input type="text" id="id_model_name" name="model_name" {% if data %} value="{{ data.model_name }}" {% else %} value="{{ product.model_name }}" {% endif %} placeholder="e.g. A2643, WH-1000XM4" class="w-full bg-transparent text-sm font-semibold text-[#0F172A] focus:outline-none placeholder-slate-400">
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl focus-within:border-[#2563EB] focus-within:bg-white transition-all">
+                    <label for="id_price" class="text-[10px] font-bold uppercase tracking-wider text-[#64748B] block mb-1">Price (NPR) <span class="text-rose-500">*</span></label>
+                    <input type="number" id="id_price" name="price" step="0.01" min="0" {% if data %} value="{{ data.price }}" {% else %} value="{{ product.price|stringformat:'.2f' }}" {% endif %} placeholder="0.00" class="w-full bg-transparent text-sm font-extrabold text-[#0F172A] focus:outline-none placeholder-slate-400 font-mono">
+                    {% if errors.price %}
+                        <p class="text-rose-600 text-xs mt-1 font-medium">{{ errors.price }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl focus-within:border-[#2563EB] focus-within:bg-white transition-all">
+                    <label for="id_battery_health" class="text-[10px] font-bold uppercase tracking-wider text-[#64748B] block mb-1">Battery Health (%)</label>
+                    <input type="number" id="id_battery_health" name="battery_health" min="0" max="100" {% if data %} value="{{ data.battery_health }}" {% else %} value="{{ product.battery_health }}" {% endif %} placeholder="e.g. 88 (Optional)" class="w-full bg-transparent text-sm font-semibold text-[#0F172A] focus:outline-none placeholder-slate-400 font-mono">
+                </div>
+
+                <div class="space-y-6 md:col-span-2">
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl focus-within:border-[#2563EB] focus-within:bg-white transition-all">
+                        <label for="id_description" class="text-[10px] font-bold uppercase tracking-wider text-[#64748B] block mb-1">Detailed Description <span class="text-rose-500">*</span></label>
+                        <textarea id="id_description" name="description" rows="4" placeholder="Describe scratches, flaws, usage duration, accessories included..." class="w-full bg-transparent text-sm font-medium text-[#0F172A] focus:outline-none placeholder-slate-400 resize-none leading-relaxed">{% if data %}{{ data.description }}{% else %}{{ product.description }}{% endif %}</textarea>
+                        {% if errors.description %}
+                            <p class="text-rose-600 text-xs mt-1 font-medium">{{ errors.description }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <label class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-slate-100/80 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="package" class="w-5 h-5 text-[#64748B]"></i>
+                            <div>
+                                <span class="text-xs font-bold text-[#0F172A] block">Original Packaging</span>
+                                <span class="text-[10px] text-[#64748B]">Includes factory box & inserts</span>
+                            </div>
+                        </div>
+                        <input type="checkbox" id="id_has_original_box" name="has_original_box" value="true" {% if data %}{% if data.has_original_box %}checked{% endif %}{% else %}{% if product.has_original_box %}checked{% endif %}{% endif %} class="w-4 h-4 text-[#2563EB] rounded border-slate-300 focus:ring-[#2563EB]">
+                    </label>
+
+                    <label class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-slate-100/80 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="file-check" class="w-5 h-5 text-[#64748B]"></i>
+                            <div>
+                                <span class="text-xs font-bold text-[#0F172A] block">Bill / Active Warranty</span>
+                                <span class="text-[10px] text-[#64748B]">Purchase invoice or brand warranty</span>
+                            </div>
+                        </div>
+                        <input type="checkbox" id="id_has_bill_or_warranty" name="has_bill_or_warranty" value="true" {% if data %}{% if data.has_bill_or_warranty %}checked{% endif %}{% else %}{% if product.has_bill_or_warranty %}checked{% endif %}{% endif %} class="w-4 h-4 text-[#2563EB] rounded border-slate-300 focus:ring-[#2563EB]">
+                    </label>
+                </div>
+
+                <div class="space-y-6 md:col-span-2">
+                    <div class="bg-slate-50 border border-dashed border-slate-300 hover:border-[#2563EB] p-6 rounded-xl flex flex-col items-center justify-center text-center group transition-colors relative">
+                        <div class="space-y-4 w-full">
+                            {% if product.product_image %}
+                                <div class="flex flex-col items-center gap-2">
+                                    <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Current Product Image</p>
+                                    <div class="w-32 h-32 rounded-xl bg-white border border-slate-200 p-2 flex items-center justify-center overflow-hidden shadow-sm">
+                                        <img src="{{ product.product_image.url }}" alt="{{ product.title }}" class="max-w-full max-h-full object-cover rounded-lg">
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <div class="space-y-2">
+                                <div class="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 mx-auto group-hover:border-[#2563EB] group-hover:text-[#2563EB] transition-colors shadow-sm">
+                                    <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+                                </div>
+                                <div class="flex text-xs text-[#64748B] justify-center">
+                                    <label for="id_product_image" class="relative cursor-pointer rounded-md font-bold text-[#2563EB] hover:underline focus-within:outline-none">
+                                        <span>Replace product photo</span>
+                                        <input id="id_product_image" name="product_image" type="file" accept="image/*" class="sr-only">
+                                    </label>
+                                </div>
+                                <p class="text-[10px] text-slate-400 uppercase tracking-wider">PNG, JPG or WEBP up to 10MB</p>
+                            </div>
+                        </div>
+                        {% if errors.product_image %}
+                            <p class="text-rose-600 text-xs mt-2 font-medium">{{ errors.product_image }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-center justify-between">
+                    <div>
+                        <label for="id_is_active" class="text-xs font-bold text-[#0F172A] block">Publish Listing Immediately</label>
+                        <p class="text-[10px] text-[#64748B]">Make this product instantly visible in the public store catalog</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="id_is_active" name="is_active" value="true" {% if data %}{% if data.is_active %}checked{% endif %}{% else %}{% if product.is_active %}checked{% endif %}{% endif %} class="sr-only peer">
+                        <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#2563EB]"></div>
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+                <button type="submit" class="flex-grow sm:flex-none bg-[#2563EB] hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 text-xs tracking-wider shadow-sm">
+                    <i data-lucide="save" class="w-4 h-4"></i>
+                    Save Changes
+                </button>
+                <a href="javascript:history.back()" class="flex-grow sm:flex-none bg-white hover:bg-slate-50 text-[#64748B] font-semibold py-3 px-6 rounded-xl transition-colors flex items-center justify-center gap-2 text-xs tracking-wider border border-slate-200 shadow-sm">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </main>
+
+    {% include 'components/_footer.html' %}
+
+    <script src="{% static 'js/lucide.min.js' %}"></script>
+    <script>
+        lucide.createIcons();
+        
+        document.getElementById('id_product_image').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name;
+            if (fileName) {
+                const labelContainer = e.target.closest('.space-y-2');
+                const textElement = labelContainer.querySelector('span');
+                textElement.textContent = fileName;
+                textElement.className = "text-emerald-600 font-mono text-xs font-semibold";
+            }
+        });
+    </script>
+</body>
+</html>
