@@ -40,12 +40,9 @@
             <div>
                 <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Marketplace</h3>
                 <ul class="space-y-2.5 text-sm">
-                    <li><a href="/sell/" class="text-[#10B981] font-medium hover:underline flex items-center gap-1">
-                        <i data-lucide="plus-circle" class="w-4 h-4"></i> Sell Your Tech
-                    </a></li>
-                    <li><a href="/buyer-protection/" class="hover:text-[#2563EB] transition">Buyer Guarantee</a></li>
-                    <li><a href="/verification/" class="hover:text-[#2563EB] transition">Device Inspection</a></li>
-                    <li><a href="/shipping-returns/" class="hover:text-[#2563EB] transition">Shipping Policy</a></li>
+                    <li><a href="#" class="hover:text-[#2563EB] transition">Buyer Guarantee</a></li>
+                    <li><a href="#" class="hover:text-[#2563EB] transition">Device Inspection</a></li>
+                    <li><a href="#" class="hover:text-[#2563EB] transition">Shipping Policy</a></li>
                 </ul>
             </div>
 
@@ -54,13 +51,12 @@
                 <ul class="space-y-2.5 text-sm">
                     {% if user.is_authenticated %}
                         <li><a href="/profile/" class="hover:text-[#2563EB] transition">My Account</a></li>
-                        <li><a href="/cart/" class="hover:text-[#2563EB] transition">My Cart</a></li>
                         <li><a href="/wishlist/" class="hover:text-[#2563EB] transition">Wishlist</a></li>
                     {% else %}
                         <li><a href="/login/" class="hover:text-[#2563EB] transition">Sign In</a></li>
                         <li><a href="/register/" class="hover:text-[#2563EB] transition">Create Account</a></li>
                     {% endif %}
-                    <li><a href="/contact/" class="hover:text-[#2563EB] transition">Contact Support</a></li>
+                    <li><a href="#" class="hover:text-[#2563EB] transition">Contact Support</a></li>
                 </ul>
             </div>
 
