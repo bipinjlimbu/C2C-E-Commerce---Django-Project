@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
-from ..models import Product
+from ..models import Product, Wishlist
 
 @login_required
 def products_view(request):
     products = Product.objects.all().order_by('-created_at')
+    
+    for product in products:
+        product.is_in_wishlist = Wishlist.objects.filter(user=request.user, product=product).exists()
     
     category = request.GET.get('category')
     condition = request.GET.get('condition')
@@ -220,5 +223,10 @@ def product_detail_view(request, product_id):
     if not product:
         messages.error(request, "Product not found.")
         return redirect('/products/')
+    
+    if Wishlist.objects.filter(user=request.user, product=product).exists():
+        product.is_in_wishlist = True
+    else:
+        product.is_in_wishlist = False
     
     return render(request, 'main/single_product_page.html', {'product': product})
