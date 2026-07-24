@@ -1,0 +1,66 @@
+<div class="space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+        <div>
+            <h2 class="text-2xl font-bold text-[#0F172A] tracking-tight">Total Spent</h2>
+            <p class="text-xs font-semibold text-[#64748B] mt-1">Track your order expenditures, payment records, and total account purchases.</p>
+        </div>
+        <div class="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-[#64748B] self-start sm:self-auto">
+            <i data-lucide="shopping-bag" class="w-4 h-4 text-[#2563EB]"></i>
+            <span>Total Spent:</span>
+            <span class="text-sm font-extrabold text-[#EF4444] font-mono ml-1">NPR {{ total_spent_amount|floatformat:2|default:"0.00" }}</span>
+        </div>
+    </div>
+
+    <div class="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[800px]">
+                <thead>
+                    <tr class="border-b border-slate-200 text-[10px] font-bold uppercase tracking-wider text-[#64748B] bg-slate-50">
+                        <th class="p-4 pl-6 w-[20%]">Order ID</th>
+                        <th class="p-4 w-[25%]">Seller Account</th>
+                        <th class="p-4 w-[25%]">Payment Method</th>
+                        <th class="p-4 w-[15%]">Amount Paid</th>
+                        <th class="p-4 pr-6 text-right w-[15%]">Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm font-semibold text-[#0F172A]">
+                    {% for log in total_spent %}
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="p-4 pl-6 align-middle">
+                                <span class="font-bold text-[#0F172A] text-xs">#ORDER-{{ log.id }}</span>
+                            </td>
+                            <td class="p-4 align-middle">
+                                <span class="text-[#0F172A] block font-bold text-sm">{{ log.seller.get_full_name|default:log.seller.username }}</span>
+                                <span class="text-[11px] font-medium text-[#64748B] block">@{{ log.seller.username }}</span>
+                            </td>
+                            <td class="p-4 align-middle">
+                                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 border border-slate-200/80 rounded-lg text-xs font-semibold text-slate-700">
+                                    <i data-lucide="credit-card" class="w-3.5 h-3.5 text-[#2563EB] shrink-0"></i>
+                                    <span>{{ log.get_payment_method_display }}</span>
+                                </div>
+                            </td>
+                            <td class="p-4 align-middle font-extrabold text-sm text-[#EF4444]">
+                                -NPR {{ log.total_amount|default:log.amount|floatformat:2 }}
+                            </td>
+                            <td class="p-4 pr-6 text-right align-middle font-medium text-xs text-[#64748B]">
+                                {{ log.created_at|date:"M j, Y H:i" }}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5" class="p-12 text-center">
+                                <div class="flex flex-col items-center justify-center text-center space-y-3">
+                                    <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+                                        <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                                    </div>
+                                    <h4 class="text-sm font-bold text-[#0F172A]">No Purchases Recorded</h4>
+                                    <p class="text-xs text-[#64748B]">You haven't made any purchases yet. Placed orders will appear here.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

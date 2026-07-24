@@ -16,6 +16,7 @@ def customer_dashboard_view(request):
         'section': section,
         'active_count': Product.objects.filter(seller=request.user, is_active=True).count(),
         'total_earning_amount': Order.objects.filter(seller=request.user, status=Order.Status.COMPLETED).aggregate(total=models.Sum('amount'))['total'] or 0,
+        'total_spent_amount': Order.objects.filter(buyer=request.user, status=Order.Status.COMPLETED).aggregate(total=models.Sum('amount'))['total'] or 0,
     }
     
     if section == 'product-management':
@@ -43,6 +44,6 @@ def customer_dashboard_view(request):
         context['total_earning'] = Order.objects.filter(seller=request.user, status=Order.Status.COMPLETED).order_by('-created_at')
         
     elif section == 'total-spent':
-        context['total_spent'] = None
+        context['total_spent'] = Order.objects.filter(buyer=request.user, status=Order.Status.COMPLETED).order_by('-created_at')
         
     return render(request, 'dashboard/customer_dashboard.html', context)
