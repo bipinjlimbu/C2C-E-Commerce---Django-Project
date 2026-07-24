@@ -78,3 +78,22 @@ def reject_order_view(request, order_id):
         messages.error(request, "Order not found or you do not have permission to update it.")
     
     return redirect('/dashboard/?section=sales-history')
+
+@login_required
+def cancel_order_view(request, order_id):
+    if request.user.is_staff:
+        messages.error(request, "Access denied. Staff members cannot cancel orders.")
+        return redirect('/')
+    
+    try:
+        order = Order.objects.get(id=order_id, buyer=request.user)
+        if order.status in [Order.Status.CONFIRMED, Order.Status.SHIPPING, Order.Status.DELIVERED]:
+            order.status = Order.Status.CANCELLED
+            order.save()
+            messages.success(request, "Order has been cancelled.")
+        else:
+            messages.error(request, "Order cannot be cancelled in its current status.")
+    except Order.DoesNotExist:
+        messages.error(request, "Order not found or you do not have permission to update it.")
+    
+    return redirect('/dashboard/?section=purchase-history')
