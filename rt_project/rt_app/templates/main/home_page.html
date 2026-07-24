@@ -155,6 +155,14 @@
                             {% else %}
                                 <i data-lucide="package" class="w-12 h-12 text-slate-400"></i>
                             {% endif %}
+
+                            {% if product.is_sold %}
+                                <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-10">
+                                    <span class="bg-red-600 text-white font-extrabold text-xl uppercase tracking-widest px-6 py-3 rounded-xl shadow-lg border-2 border-white">
+                                        Sold Out
+                                    </span>
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
@@ -173,11 +181,6 @@
                                     <p class="text-[10px] uppercase font-bold text-[#64748B]">Price</p>
                                     <p class="text-base font-extrabold text-[#10B981] font-mono">NPR {{ product.price|floatformat:2 }}</p>
                                 </div>
-
-                                <span class="bg-[#2563EB] hover:bg-blue-700 text-white text-xs font-bold px-3.5 py-2 rounded-lg transition-colors flex items-center gap-1.5 shadow-xs">
-                                    <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i>
-                                    <span>Buy</span>
-                                </span>
                             </div>
                         </div>
                     </a>

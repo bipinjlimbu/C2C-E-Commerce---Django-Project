@@ -15,6 +15,10 @@ def initiate_payment_view(request):
         payment_method = request.POST.get('payment_method')
         shipping_address = request.POST.get('shipping_address')
         
+        if Order.objects.filter(buyer_id=buyer_id, product_id=product_id, status__in=[Order.Status.CONFIRMED, Order.Status.SHIPPING, Order.Status.DELIVERED]).exists():
+            messages.error(request, "You have already placed an order for this product.")
+            return redirect(f'/products/{product_id}/')
+        
         try:
             product = Product.objects.get(id=product_id)
             buyer = User.objects.get(id=buyer_id)
@@ -38,7 +42,7 @@ def initiate_payment_view(request):
             order.save()
             
             messages.success(request, "Order placed successfully. Please pay the seller upon delivery.")
-            return redirect('/dashboard/?section=pending-orders')
+            return redirect('/dashboard/?section=pending-purchase')
             
         # --- ESEWA PAYMENT INITIALIZATION ---
         total_amount = str(product.price)

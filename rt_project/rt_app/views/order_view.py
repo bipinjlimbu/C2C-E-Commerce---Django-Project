@@ -51,6 +51,8 @@ def order_complete_view(request, order_id):
         order = Order.objects.get(id=order_id, buyer=request.user)
         if order.status == Order.Status.DELIVERED:
             order.status = Order.Status.COMPLETED
+            order.product.is_sold = True
+            order.product.save()
             order.save()
             messages.success(request, "Order has been marked as completed.")
         else:
