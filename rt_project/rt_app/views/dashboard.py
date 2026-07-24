@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import models
-from ..models import User, Product, Order, Review
+from ..models import User, Product, Order
 
 @login_required
 def customer_dashboard_view(request):
@@ -33,12 +33,6 @@ def customer_dashboard_view(request):
         
     elif section == 'purchase-history':
         context['purchase_history'] = Order.objects.filter(buyer=request.user, status__in=[Order.Status.COMPLETED, Order.Status.CANCELLED, Order.Status.REJECTED]).order_by('-created_at')
-        
-    elif section == 'reviews-received':
-        context['reviews_received'] = None
-        
-    elif section == 'reviews-provided':
-        context['reviews_provided'] = None
         
     elif section == 'total-earning':
         context['total_earning'] = Order.objects.filter(seller=request.user, status=Order.Status.COMPLETED).order_by('-created_at')

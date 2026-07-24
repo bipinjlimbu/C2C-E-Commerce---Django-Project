@@ -79,20 +79,6 @@
             </div>
 
             <div class="space-y-1">
-                <h3 class="px-4 text-[9px] font-bold text-[#64748B] uppercase tracking-widest mb-3">Feedback</h3>
-                
-                <a href="?section=reviews-received" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'reviews-received' %}bg-[#2563EB] text-white shadow-md font-semibold{% else %}text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
-                    <i data-lucide="star" class="w-4 h-4 transition-transform group-hover:scale-105"></i>
-                    Reviews Received
-                </a>
-
-                <a href="?section=reviews-provided" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'reviews-provided' %}bg-[#2563EB] text-white shadow-md font-semibold{% else %}text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
-                    <i data-lucide="message-square-heart" class="w-4 h-4 transition-transform group-hover:scale-105"></i>
-                    Reviews Provided
-                </a>
-            </div>
-
-            <div class="space-y-1">
                 <h3 class="px-4 text-[9px] font-bold text-[#64748B] uppercase tracking-widest mb-3">Financials</h3>
                 
                 <a href="?section=total-earning" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'total-earning' %}bg-[#2563EB] text-white shadow-md font-semibold{% else %}text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
@@ -140,12 +126,6 @@
 
         {% elif section == 'purchase-history' %}
             {% include 'dashboard/customer/_purchase_history.html' %}
-
-        {% elif section == 'reviews-received' %}
-            {% include 'dashboard/customer/_reviews_received.html' %}
-
-        {% elif section == 'reviews-provided' %}
-            {% include 'dashboard/customer/_reviews_provided.html' %}
 
         {% elif section == 'total-earning' %}
             {% include 'dashboard/customer/_total_earning.html' %}

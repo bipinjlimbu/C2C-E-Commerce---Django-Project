@@ -92,15 +92,3 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order #{self.id} | {self.product.title} (Buyer: {self.buyer.username})"
-
-
-class Review(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
-    reviewer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='given_reviews')
-    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_reviews')
-    rating = models.PositiveIntegerField(default=5)
-    comment = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Review ({self.rating}★) by {self.reviewer.username} for {self.seller.username} on {self.product.title}"
