@@ -29,7 +29,7 @@ def customer_dashboard_view(request):
         context['sales_history'] = Order.objects.filter(seller=request.user, status__in=[Order.Status.COMPLETED, Order.Status.CANCELLED, Order.Status.REJECTED]).order_by('-created_at')
         
     elif section == 'purchase-history':
-        context['purchase_history'] = None
+        context['purchase_history'] = Order.objects.filter(buyer=request.user, status__in=[Order.Status.COMPLETED, Order.Status.CANCELLED, Order.Status.REJECTED]).order_by('-created_at')
         
     elif section == 'reviews-received':
         context['reviews_received'] = None

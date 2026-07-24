@@ -1428,6 +1428,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(253 230 138 / var(--tw-border-opacity));
 }
 
+.border-rose-200\/80 {
+  border-color: rgb(254 205 211 / 0.8);
+}
+
 .border-t-transparent {
   border-top-color: transparent;
 }
@@ -1935,6 +1939,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .leading-relaxed {
