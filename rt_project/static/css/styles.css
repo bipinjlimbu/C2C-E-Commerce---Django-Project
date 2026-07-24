@@ -431,7 +431,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-scroll-snap-strictness: proximity;
 }
 
-.divide-y > *, .border, .border-4, .border-2, .border-t, .border-b, .border-b-2, .border-l, .border-r, .border-b-\[6px\], .file\:border-0::file-selector-button, .after\:border::after {
+.divide-y > *, .border, .border-4, .border-2, .border-t, .border-b, .border-b-2, .border-l, .border-r, .border-b-\[6px\], .file\:border-0::file-selector-button, .after\:border::after, .sm\:border-t-0 {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
@@ -841,6 +841,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   min-height: 220px;
 }
 
+.min-h-\[300px\] {
+  min-height: 300px;
+}
+
 .w-full {
   width: 100%;
 }
@@ -1058,6 +1062,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -1132,6 +1140,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .gap-5 {
   gap: 1.25rem;
+}
+
+.gap-2\.5 {
+  gap: 0.625rem;
 }
 
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
@@ -2274,6 +2286,26 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-timing-function: cubic-bezier(0.18,0.89,0.32,1.28);
 }
 
+.selection\:bg-blue-100 *::-moz-selection {
+  --tw-bg-opacity: 1;
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
+}
+
+.selection\:bg-blue-100 *::selection {
+  --tw-bg-opacity: 1;
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
+}
+
+.selection\:bg-blue-100::-moz-selection {
+  --tw-bg-opacity: 1;
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
+}
+
+.selection\:bg-blue-100::selection {
+  --tw-bg-opacity: 1;
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
+}
+
 .file\:mr-3::file-selector-button {
   margin-right: 0.75rem;
 }
@@ -2413,6 +2445,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(254 202 202 / var(--tw-border-opacity));
 }
 
+.hover\:border-rose-200:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(254 205 211 / var(--tw-border-opacity));
+}
+
 .hover\:bg-blue-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
@@ -2490,6 +2527,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(248 250 252 / 0.8);
 }
 
+.hover\:bg-rose-50:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 241 242 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-slate-800:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 41 59 / var(--tw-bg-opacity));
+}
+
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -2518,6 +2565,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:text-red-500:hover {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.hover\:text-rose-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(225 29 72 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {
@@ -2633,8 +2685,16 @@ Ensure the default browser behavior of the `hidden` attribute.
     grid-column: span 1 / span 1;
   }
 
+  .sm\:inline {
+    display: inline;
+  }
+
   .sm\:h-52 {
     height: 13rem;
+  }
+
+  .sm\:w-auto {
+    width: auto;
   }
 
   .sm\:min-w-\[300px\] {
@@ -2661,6 +2721,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     flex-direction: row;
   }
 
+  .sm\:items-start {
+    align-items: flex-start;
+  }
+
   .sm\:items-center {
     align-items: center;
   }
@@ -2669,8 +2733,16 @@ Ensure the default browser behavior of the `hidden` attribute.
     justify-content: flex-start;
   }
 
+  .sm\:justify-end {
+    justify-content: flex-end;
+  }
+
   .sm\:self-auto {
     align-self: auto;
+  }
+
+  .sm\:border-t-0 {
+    border-top-width: 0px;
   }
 
   .sm\:p-8 {
@@ -2689,9 +2761,17 @@ Ensure the default browser behavior of the `hidden` attribute.
     padding: 3rem;
   }
 
+  .sm\:p-5 {
+    padding: 1.25rem;
+  }
+
   .sm\:px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+
+  .sm\:pt-0 {
+    padding-top: 0px;
   }
 
   .sm\:text-left {
