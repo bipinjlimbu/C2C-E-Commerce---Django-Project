@@ -42,6 +42,25 @@ def deliver_order_view(request, order_id):
     return redirect('/dashboard/?section=pending-sales')
 
 @login_required
+def order_complete_view(request, order_id):
+    if request.user.is_staff:
+        messages.error(request, "Access denied. Staff members cannot mark orders as completed.")
+        return redirect('/')
+    
+    try:
+        order = Order.objects.get(id=order_id, buyer=request.user)
+        if order.status == Order.Status.DELIVERED:
+            order.status = Order.Status.COMPLETED
+            order.save()
+            messages.success(request, "Order has been marked as completed.")
+        else:
+            messages.error(request, "Order cannot be marked as completed in its current status.")
+    except Order.DoesNotExist:
+        messages.error(request, "Order not found or you do not have permission to update it.")
+    
+    return redirect('/dashboard/?section=purchase-history')
+
+@login_required
 def reject_order_view(request, order_id):
     if request.user.is_staff:
         messages.error(request, "Access denied. Staff members cannot reject orders.")
