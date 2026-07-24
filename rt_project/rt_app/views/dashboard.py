@@ -24,7 +24,7 @@ def admin_dashboard_view(request):
         context['products'] = Product.objects.all().order_by('-created_at')
         
     elif section == 'track-orders':
-        context['orders'] = None
+        context['orders'] = Order.objects.all().order_by('-created_at')
         
     return render(request, 'dashboard/admin_dashboard.html', context)
 
