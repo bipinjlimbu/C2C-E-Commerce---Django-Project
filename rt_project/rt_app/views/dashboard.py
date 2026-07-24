@@ -5,6 +5,29 @@ from django.db import models
 from ..models import User, Product, Order
 
 @login_required
+def admin_dashboard_view(request):
+    if not request.user.is_staff:
+        messages.error(request, "Access denied. Only staff members can access the admin dashboard.")
+        return redirect('/')
+    
+    section = request.GET.get('section', 'user-management')
+    
+    context = {
+        'section': section,
+    }
+    
+    if section == 'user-management':
+        context['users'] = None
+        
+    elif section == 'listed-products':
+        context['products'] = None
+        
+    elif section == 'track-orders':
+        context['orders'] = None
+        
+    return render(request, 'dashboard/admin_dashboard.html', context)
+
+@login_required
 def customer_dashboard_view(request):
     if request.user.is_staff:
         messages.error(request, "Access denied. Staff members cannot access the customer dashboard.")

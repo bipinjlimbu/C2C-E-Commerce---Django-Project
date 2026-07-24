@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superadmin Workspace - ReTech</title>
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+
+<body class="bg-[#F8FAFC] text-[#0F172A] antialiased flex min-h-screen overflow-hidden font-sans">
+
+    {% include 'components/_messages.html' %}
+
+    <aside class="w-80 bg-white flex flex-col border-r border-slate-200/80 relative z-30 shadow-sm">
+        
+        <div class="p-8 border-b border-slate-100">
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 bg-[#2563EB] rounded-xl flex items-center justify-center shadow-sm">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-[#0F172A]">
+                        Re<span class="text-[#2563EB]">Tech</span>
+                    </h1>
+                    <p class="text-[9px] font-bold uppercase tracking-widest text-[#64748B] mt-0.5">Superadmin Panel</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="flex-grow p-6 space-y-6 overflow-y-auto custom-scrollbar">
+            
+            <div class="space-y-1">
+                <h3 class="px-4 text-[9px] font-bold text-[#64748B] uppercase tracking-widest mb-3">User Control</h3>
+                
+                <a href="?section=user-management" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'user-management' or not section %}bg-[#2563EB] text-white shadow-md font-semibold{% else %}text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
+                    <i data-lucide="users" class="w-4 h-4 transition-transform group-hover:scale-105"></i>
+                    User Management
+                </a>
+            </div>
+
+            <div class="space-y-1">
+                <h3 class="px-4 text-[9px] font-bold text-[#64748B] uppercase tracking-widest mb-3">Catalog</h3>
+                
+                <a href="?section=listed-products" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'listed-products' %}bg-[#2563EB] text-white shadow-md font-semibold{% else %}text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
+                    <i data-lucide="package-search" class="w-4 h-4 transition-transform group-hover:scale-105"></i>
+                    Listed Products
+                </a>
+            </div>
+
+            <div class="space-y-1">
+                <h3 class="px-4 text-[9px] font-bold text-[#64748B] uppercase tracking-widest mb-3">Logistics</h3>
+                
+                <a href="?section=track-orders" class="flex items-center gap-4 px-4 py-3.5 rounded-xl {% if section == 'track-orders' %}bg-[#2563EB] text-white shadow-md font-semibold{% else %}text-[#64748B] hover:bg-slate-50 hover:text-[#0F172A] font-medium{% endif %} uppercase text-xs tracking-wider transition-all group">
+                    <i data-lucide="truck" class="w-4 h-4 transition-transform group-hover:scale-105"></i>
+                    Track Orders
+                </a>
+            </div>
+
+        </nav>
+
+        <div class="p-6 border-t border-slate-100 bg-slate-50 flex flex-col gap-2">
+            <a href="/profile/" 
+               class="flex items-center justify-center gap-3 w-full bg-[#2563EB] text-white px-6 py-3.5 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-blue-700 transition-all shadow-sm active:scale-95">
+                <i data-lucide="user" class="w-4 h-4"></i>
+                Admin Profile
+            </a>
+
+            <a href="/"
+               class="flex items-center justify-center gap-3 w-full bg-white border border-slate-200 text-[#0F172A] px-6 py-3.5 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-slate-100 transition-all active:scale-95">
+                <i data-lucide="external-link" class="w-4 h-4 text-[#2563EB]"></i>
+                Live Marketplace
+            </a>
+        </div>
+
+    </aside>
+
+    <main class="flex-grow flex flex-col h-screen overflow-y-auto bg-[#F8FAFC] p-6 sm:p-8">
+        
+        {% if section == 'user-management' or not section %}
+            {% include 'dashboard/admin/_user_management.html' %}
+
+        {% elif section == 'listed-products' %}
+            {% include 'dashboard/admin/_listed_products.html' %}
+
+        {% elif section == 'track-orders' %}
+            {% include 'dashboard/admin/_track_orders.html' %}
+
+        {% endif %}
+
+    </main>
+
+    <script src="{% static 'js/lucide.min.js' %}"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

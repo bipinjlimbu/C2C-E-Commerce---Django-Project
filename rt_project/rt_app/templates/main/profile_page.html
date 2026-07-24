@@ -20,7 +20,11 @@
             </div>
             
             <div class="flex flex-wrap items-center gap-2">
-                <a href="/dashboard/" class="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-50 text-[#0F172A] font-medium text-sm rounded-xl border border-slate-200 shadow-sm transition-colors">
+                {% if request.user.is_staff %}
+                    <a href="/dashboard/admin/" class="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-50 text-[#0F172A] font-medium text-sm rounded-xl border border-slate-200 shadow-sm transition-colors">
+                {% else %}
+                    <a href="/dashboard/" class="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-50 text-[#0F172A] font-medium text-sm rounded-xl border border-slate-200 shadow-sm transition-colors">
+                {% endif %}
                     <i data-lucide="layout-dashboard" class="w-4 h-4 text-[#2563EB]"></i> Dashboard
                 </a>
 
