@@ -121,8 +121,16 @@ def add_product_view(request):
 @login_required
 def is_active_toggle_view(request, product_id):
     if request.user.is_staff:
-        messages.error(request, "Access denied. Staff members cannot modify products.")
-        return redirect('/')
+        try:
+            product = Product.objects.get(id=product_id)
+            product.is_active = not product.is_active
+            product.save()
+            status = "activated" if product.is_active else "deactivated"
+            messages.success(request, f"Product {status} successfully.")
+        except Product.DoesNotExist:
+            messages.error(request, "Product not found.")
+            
+        return redirect('/dashboard/admin/?section=listed-products')
     
     try:
         product = Product.objects.get(id=product_id, seller=request.user)
@@ -204,8 +212,14 @@ def edit_product_view(request, product_id):
 @login_required
 def delete_product_view(request, product_id):
     if request.user.is_staff:
-        messages.error(request, "Access denied. Staff members cannot delete products.")
-        return redirect('/')
+        try:
+            product = Product.objects.get(id=product_id)
+            product.delete()
+            messages.success(request, "Product deleted successfully.")
+        except Product.DoesNotExist:
+            messages.error(request, "Product not found.")
+        
+        return redirect('/dashboard/admin/?section=listed-products')
     
     try:
         product = Product.objects.get(id=product_id, seller=request.user)

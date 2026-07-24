@@ -14,13 +14,14 @@ def admin_dashboard_view(request):
     
     context = {
         'section': section,
+        'active_count': Product.objects.filter(is_active=True).count(),
     }
     
     if section == 'user-management':
         context['users'] = User.objects.filter(is_staff=False).order_by('-date_joined')
         
     elif section == 'listed-products':
-        context['products'] = None
+        context['products'] = Product.objects.all().order_by('-created_at')
         
     elif section == 'track-orders':
         context['orders'] = None

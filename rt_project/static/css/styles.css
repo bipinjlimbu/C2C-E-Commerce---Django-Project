@@ -1514,6 +1514,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(233 213 255 / var(--tw-border-opacity));
 }
 
+.border-blue-200\/60 {
+  border-color: rgb(191 219 254 / 0.6);
+}
+
 .border-t-transparent {
   border-top-color: transparent;
 }
@@ -2224,6 +2228,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-\[\#EF4444\] {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+
+.text-blue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 
 .decoration-2 {
