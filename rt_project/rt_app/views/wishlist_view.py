@@ -25,3 +25,14 @@ def wishlist_toggle_view(request, product_id):
         messages.success(request, f"{product.title} has been added to your wishlist.")
 
     return redirect(f'/products/{product_id}/')
+
+@login_required
+def wishlist_remove_view(request, product_id):
+    try:
+        wishlist_item = Wishlist.objects.get(user=request.user, product_id=product_id)
+        wishlist_item.delete()
+        messages.success(request, "Item removed from your wishlist.")
+    except Wishlist.DoesNotExist:
+        messages.error(request, "Item not found in your wishlist.")
+
+    return redirect('wishlist')
