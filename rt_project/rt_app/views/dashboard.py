@@ -17,7 +17,7 @@ def admin_dashboard_view(request):
     }
     
     if section == 'user-management':
-        context['users'] = None
+        context['users'] = User.objects.filter(is_staff=False).order_by('-date_joined')
         
     elif section == 'listed-products':
         context['products'] = None
